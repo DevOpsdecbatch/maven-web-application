@@ -35,5 +35,24 @@ pipeline {
                 sh 'docker build -t soumyarajakumar/mavenapplication:$buildNumber .'
             }
         }
+          stage('Push Docker Image to DockerHub')
+        {
+            steps()
+            {
+                withCredentials([string(credentialsId: 'DockerHub_Password', variable: 'DockerHub_Password')]) 
+                {
+                    sh 'docker login -u soumyarajakumar -p $DockerHub_Password'
+                }
+                sh 'docker push soumyarajakumar/mavenapplication:$buildNumber'
+            }
+        }
+
+        stage('Remove Docker Image from Local')
+        {
+            steps()
+            {
+                sh 'docker rmi soumyarajakumar/mavenapplication:$buildNumber'
+            }
+        }
     }
 }
