@@ -1,15 +1,16 @@
 Pipeline {
-agent any
 
-tools
-    {
-        maven 'Maven_3.9.9'
-    }
+    agent any
 
-environment
-    {
-        buildNumber = "${BUILD_NUMBER}"
-    }
+    tools
+        {
+            maven 'Maven_3.9.9'
+        }
+
+    environment
+        {
+            buildNumber = "${BUILD_NUMBER}"
+        }
     stages
     {
 
