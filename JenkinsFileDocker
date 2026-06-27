@@ -14,23 +14,23 @@ environment
     stages
     {
 
-        stage(Checkout code from GitHub)
+        stage('Checkout code from GitHub')
         {
-            steps( )
+            steps()
             {
                 git branch: 'DevOpsPractice', url: 'https://github.com/DevOpsdecbatch/maven-web-application.git'
             }
         }
-        stage(Build Maven Package)
+        stage('Build Maven Package')
         {
-            steps( )
+            steps()
             {
                 sh 'mvn clean package'
             }
         }
-        stage(Build Docker Image)
+        stage('Build Docker Image')
         {
-            steps( )
+            steps()
             {
                 sh 'docker build -t soumyarajakumar/mavenapplication:$buildNumber .'
             }
