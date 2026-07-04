@@ -54,5 +54,17 @@ pipeline {
                 sh 'docker rmi soumyarajakumar/mavenapplication:$buildNumber'
             }
         }
+
+        stage('Deploy Application to Docker Deployment Server')
+        {
+            steps()
+            {
+                sshagent(['DeploymentServer_SSH']) 
+                {
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@98.130.124.83 docker rm -f maven-container || true'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@98.130.124.83 docker run -d --name maven-container -p 8080:8080 soumyarajakumar/mavenapplication:$buildNumber'
+                }
+            }
+        }
     }
 }
